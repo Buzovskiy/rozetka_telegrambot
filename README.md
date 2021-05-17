@@ -34,4 +34,6 @@
    systemctl restart rozetka.service
    ```
 
+Github: https://github.com/Buzovskiy/rozetka_telegrambot
+
 
