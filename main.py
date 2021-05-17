@@ -50,7 +50,7 @@ class SQLighter:
             self.cursor.execute("UPDATE tovar SET price = ?, nalichie = ? WHERE url = ?", (price, nalichie, url))
 
 
-db = SQLighter('rozetka.db')
+db = SQLighter(project_settings.BASE_DIR / 'rozetka.db')
 
 
 TOKEN = project_settings.TOKEN
@@ -68,7 +68,7 @@ async def parse():
     print('--------------------------------------------------------')
     print(datetime.now())
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36'}
-    page_link = 'https://rozetka.com.ua/ua/utsenennie-videokarti/c4630680/'
+    page_link = project_settings.PAGE_LINK
     response = requests.get(page_link, headers=headers)
     html = response.content.decode('utf-8')
     soup = BeautifulSoup(html, 'html.parser')

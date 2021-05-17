@@ -1,0 +1,10 @@
+[Unit]
+Description=rozetka service
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/home/bond/rozetka/v3/env/bin/python3.7 /home/bond/rozetka/v3/main.py
+
+[Install]
+WantedBy=multi-user.target
