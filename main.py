@@ -65,8 +65,8 @@ async def shutdown(uka):
 
 
 async def parse():
-    print('--------------------------------------------------------')
-    print(datetime.now())
+   # print('--------------------------------------------------------')
+   # print(datetime.now())
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36'}
     page_link = project_settings.PAGE_LINK
     response = requests.get(page_link, headers=headers)
@@ -80,17 +80,17 @@ async def parse():
         url = singleGood.find('a', attrs={'class': 'goods-tile__picture'})['href']
         try:
             price = singleGood.find('span', {'class': 'goods-tile__price-value'}).text
-            print('price', price)
+        #    print('price', price)
         except:
             price = 'NONE'
-        print(f'{allGoodsOnPage.index(singleGood)} / {len(allGoodsOnPage)} - {url}')
+       # print(f'{allGoodsOnPage.index(singleGood)} / {len(allGoodsOnPage)} - {url}')
         if nalichie == 'Є в наявності':
             nalichie = '✅Є в наявності'
             price = singleGood.find('span', attrs={'class': 'goods-tile__price-value'}).text
         elif nalichie == 'Закінчився':
             nalichie = '❌Закінчився'
         if not db.url_exists(url):
-            print(f'{url} - exists')
+          #  print(f'{url} - exists')
             db.url_add(url, price, nalichie)
             for admin in ADMINS:
                 await bot.send_photo(admin, caption=f'*🆕НОВЫЙ ТОВАР*\n*{title}*\n{nalichie}\n💰{price}грн\n🔗{url}', photo=img,parse_mode='Markdown')
