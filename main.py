@@ -93,12 +93,14 @@ async def parse():
           #  print(f'{url} - exists')
             db.url_add(url, price, nalichie)
             for admin in ADMINS:
-                await bot.send_photo(admin, caption=f'*🆕НОВЫЙ ТОВАР*\n*{title}*\n{nalichie}\n💰{price}грн\n🔗{url}', photo=img,parse_mode='Markdown')
+                # await bot.send_photo(admin, caption=f'*🆕НОВЫЙ ТОВАР*\n*{title}*\n{nalichie}\n💰{price}грн\n🔗{url}', photo=img,parse_mode='Markdown')
+                await bot.send_message(admin, f'*🆕НОВЫЙ ТОВАР*\n*{title}*\n{nalichie}\n💰{price}грн\n🔗{url}')
         elif db.url_execute(url):
             tovar = db.url_execute(url)
             if price != tovar.get('price') or nalichie != tovar.get('nalichie'):
                 for admin in ADMINS:
-                    await bot.send_photo(admin,caption=f'❗*ИЗМЕНЕНИЯ В ТОВАРЕ*❗\n*'f'{title}*\n''*СТАРАЯ ИНФОРМАЦИЯ*: \n'f'{tovar.get("nalichie")}\n'f'❌{tovar.get("price")}грн\n''*🆕НОВАЯ ИНФОРМАЦИЯ*: \n'f'{nalichie}\n'f'💰{price}грн\n'f'🔗{url}',photo=img, parse_mode='Markdown')
+                    # await bot.send_photo(admin,caption=f'❗*ИЗМЕНЕНИЯ В ТОВАРЕ*❗\n*'f'{title}*\n''*СТАРАЯ ИНФОРМАЦИЯ*: \n'f'{tovar.get("nalichie")}\n'f'❌{tovar.get("price")}грн\n''*🆕НОВАЯ ИНФОРМАЦИЯ*: \n'f'{nalichie}\n'f'💰{price}грн\n'f'🔗{url}',photo=img, parse_mode='Markdown')
+                    await bot.send_message(admin, f'❗*ИЗМЕНЕНИЯ В ТОВАРЕ*❗\n*'f'{title}*\n''*СТАРАЯ ИНФОРМАЦИЯ*: \n'f'{tovar.get("nalichie")}\n'f'❌{tovar.get("price")}грн\n''*🆕НОВАЯ ИНФОРМАЦИЯ*: \n'f'{nalichie}\n'f'💰{price}грн\n'f'🔗{url}')
                     db.url_update(price=price, nalichie=nalichie, url=url)
 
 
